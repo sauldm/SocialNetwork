@@ -1,4 +1,4 @@
-import users from './data/users.js';
+import {users} from './data/users.js';
 
 let user1 = users[0];
 console.log(user1);
