@@ -1,4 +1,2 @@
-let prueba = "Hola";
-console.log(prueba);
-let prueba2 = "prueba2";
-console.log(prueba2);
+import {comments} from './data/comments.js';
+console.log(comments);
