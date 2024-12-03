@@ -33,7 +33,7 @@ proyecto-twitter/
 └── README.md
 ```
 
-## 🧩 División de Tareas (Ejemplo)  
+## 🧩 División de Tareas (Temporal)  
 
 **[Andrés]**: Desarrollo del formulario de filtrado y la función de búsqueda 🔍.  
 **[Miguel]**: Implementación de la funcionalidad de creación de nuevos elementos ➕.  
