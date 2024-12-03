@@ -1,17 +1,37 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>CRUD EN JS</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Network</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-  <div id="container">
-    <template id="template">
-      <h2></h2>
-      <p></p>
-    </template>
-  </div>
-  <script src="main.js" type="module"></script>
+    <div id="container">
+        <template id="post-template">
+            <article class="post">
+                <div class="post-cabecera">
+                    <h2 class="post-titulo"></h2>
+                    <p class="post-autor"></p>
+                </div>
+                <p class="post-body"></p>
+                <div class="comments-section">
+                    <h3>Comments</h3>
+                    <div class="comments-container"></div>
+                </div>
+            </article>
+        </template>
+
+        <template id="comment-template">
+            <div class="comment">
+                <div class="comment-cabecera">
+                    <strong class="comment-autor"></strong>
+                    <span class="comment-username"></span>
+                </div>
+                <p class="comment-body"></p>
+            </div>
+        </template>
+    </div>
+    <script src="main.js" type="module"></script>
 </body>
 </html>
