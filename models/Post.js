@@ -19,7 +19,7 @@ export class Post {
   render() {
     const template = document.getElementById('post-template').content.cloneNode(true);
     template.querySelector('.post-titulo').textContent = this.title;
-    template.querySelector('.post-autor').textContent = `Posted by ${this.user.name} (@${this.user.username})`;
+    template.querySelector('.post-autor').textContent = `Publicado por ${this.user.name} (@${this.user.username})`;
     template.querySelector('.post-body').textContent = this.body;
 
     const commentsContainer = template.querySelector('.comments-container');
