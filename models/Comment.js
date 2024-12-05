@@ -9,9 +9,12 @@ export class Comment {
 
   render() {
     const template = document.getElementById('comment-template').content.cloneNode(true);
-    template.querySelector('.comment-autor').textContent = this.name;
-    template.querySelector('.comment-username').textContent = this.email;
-    template.querySelector('.comment-body').textContent = this.body;
-    return template;
+    const commentElement = template.querySelector('.comment');
+    
+    commentElement.querySelector('.comment-autor').textContent = this.name;
+    commentElement.querySelector('.comment-username').textContent = this.email;
+    commentElement.querySelector('.comment-body').textContent = this.body;
+    
+    return commentElement;
   }
 }
