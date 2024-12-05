@@ -149,3 +149,23 @@ postObjetos.forEach(post => {
 });
 
 postsContainer.appendChild(fragmento);
+
+// Lógica para el botón de volver arriba
+const botonVolverArriba = document.getElementById('volverArriba');
+
+// Mostrar/ocultar el botón según el scroll
+window.addEventListener('scroll', () => {
+    if (window.scrollY > 300) {
+        botonVolverArriba.classList.add('visible');
+    } else {
+        botonVolverArriba.classList.remove('visible');
+    }
+});
+
+// Volver arriba con animación suave
+botonVolverArriba.addEventListener('click', () => {
+    window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+    });
+});
