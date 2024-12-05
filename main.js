@@ -20,10 +20,10 @@ for (let i = 0; i < users.length; i++) {
 }
 
 const usuariosPredefinidos = [
-    { id: maxId + 1, name: "Andrés", username: "andres.aranda", email: "andres@example.com" },
-    { id: maxId + 2, name: "Saúl", username: "saul.dominguez", email: "saul@example.com" },
-    { id: maxId + 3, name: "Miguel", username: "miguel.rico", email: "miguel@example.com" },
-    { id: maxId + 4, name: "Carlos", username: "carlos.perea", email: "carlos@example.com" }
+    { id: maxId + 1, name: "Andrés", username: "andres.aranda", email: "andres@example.com", lat: "39.4699", lng: "-0.3763", phone: "123-456-789", website: "andres.dev" },
+    { id: maxId + 2, name: "Saúl", username: "saul.dominguez", email: "saul@example.com", lat: "39.4699", lng: "-0.3763", phone: "234-567-890", website: "saul.dev" },
+    { id: maxId + 3, name: "Miguel", username: "miguel.rico", email: "miguel@example.com", lat: "39.4699", lng: "-0.3763", phone: "345-678-901", website: "miguel.dev" },
+    { id: maxId + 4, name: "Carlos", username: "carlos.perea", email: "carlos@example.com", lat: "39.4699", lng: "-0.3763", phone: "456-789-012", website: "carlos.dev" }
 ];
 
 // Crear objetos User para los usuarios predefinidos
@@ -32,7 +32,11 @@ usuariosPredefinidos.forEach(userData => {
         userData.id,
         userData.name,
         userData.username,
-        userData.email
+        userData.email,
+        userData.lat,
+        userData.lng,
+        userData.phone,
+        userData.website
     );
     userObjetos.push(user);
 });
@@ -43,7 +47,11 @@ users.forEach(userData => {
         userData.id,
         userData.name,
         userData.username,
-        userData.email
+        userData.email,
+        userData.address.geo.lat,
+        userData.address.geo.lng,
+        userData.phone,
+        userData.website
     );
     userObjetos.push(user);
 });
@@ -56,6 +64,8 @@ posts.forEach(postData => {
         postData.title,
         postData.body
     );
+
+    // Encontrar el usuario correspondiente y asignarlo al post
     const user = userObjetos.find(u => u.id === postData.userId);
     if (user) {
         post.asignarUsuario(user);
@@ -81,7 +91,7 @@ comments.forEach(commentData => {
     }
 });
 
-// Poblar el select SOLO con los usuarios predefinidos
+// Establecer el select SOLO con los usuarios predefinidos
 const userSelect = document.getElementById('usuarioSelect');
 usuariosPredefinidos.forEach(user => {
     const option = document.createElement('option');
