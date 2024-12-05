@@ -9,7 +9,7 @@ Crear una aplicación web dinámica que permita visualizar, filtrar y realizar o
 - [@anndrees](https://www.github.com/anndrees) 🧑‍💻  
 - [@MigDaw](https://www.github.com/MigDaw) 👨‍💻  
 - [@sauldm](https://www.github.com/sauldm) 👩‍💻  
-- y Carlos ✨  
+- [@chalspj](https://www.github.com/chalspj) 👩‍💻
 
 ## 🛠️ Tecnologías  
 
