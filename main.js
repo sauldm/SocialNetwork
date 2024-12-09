@@ -170,7 +170,7 @@ botonVolverArriba.addEventListener('click', () => {
   });
 });
 
-// Modal functionality
+// Funcionalidad del modal
 const modalEliminar = document.getElementById('modal-eliminar');
 const btnCancelar = document.getElementById('btn-cancelar');
 const btnEliminar = document.getElementById('btn-eliminar');
@@ -198,6 +198,7 @@ document.addEventListener('click', (e) => {
 btnCancelar.addEventListener('click', ocultarModalEliminar);
 
 btnEliminar.addEventListener('click', () => {
+  // AQUÍ VA LA LÓGICA DE ELIMINAR PUBLICACIÓN
   alert("Esto aun no está implementado jaja poneros las pilas");
   ocultarModalEliminar();
 });
