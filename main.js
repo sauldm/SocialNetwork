@@ -170,8 +170,34 @@ botonVolverArriba.addEventListener('click', () => {
   });
 });
 
-document.querySelectorAll('.eliminar-post-btn').forEach(btn => {
-  btn.addEventListener('click', () => {
-    alert("Esto aun no está implementado jaja poneros las pilas");
-  });
+// Modal functionality
+const modalEliminar = document.getElementById('modal-eliminar');
+const btnCancelar = document.getElementById('btn-cancelar');
+const btnEliminar = document.getElementById('btn-eliminar');
+
+function mostrarModalEliminar() {
+  modalEliminar.classList.remove('oculto');
+}
+
+function ocultarModalEliminar() {
+  modalEliminar.classList.add('oculto');
+}
+
+// Eventos para la funcionalidad de eliminar
+document.addEventListener('click', (e) => {
+  if (e.target.closest('.eliminar-post-btn')) {
+    mostrarModalEliminar();
+  }
+
+  // Cerrar modal al hacer click fuera
+  if (e.target === modalEliminar) {
+    ocultarModalEliminar();
+  }
+});
+
+btnCancelar.addEventListener('click', ocultarModalEliminar);
+
+btnEliminar.addEventListener('click', () => {
+  alert("Esto aun no está implementado jaja poneros las pilas");
+  ocultarModalEliminar();
 });
