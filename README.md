@@ -24,6 +24,7 @@ proyecto-twitter/
 ├── index.html
 ├── styles.css
 ├── main.js
+├── img/
 ├── data/
 │   ├── usuarios.js
 │   ├── posts.js
