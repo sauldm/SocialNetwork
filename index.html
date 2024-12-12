@@ -34,7 +34,7 @@
           <article class="post">
             <div class="post-cabecera">
               <h2 class="post-titulo"></h2>
-              <p class="post-autor"></p>
+              <p class="post-autor usuario-link"></p>
               <button class="eliminar-post-btn">
                 <svg width="24px" height="24px" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
                   <path d="M12 2.75C11.0215 2.75 10.1871 3.37503 9.87787 4.24993C9.73983 4.64047 9.31134 4.84517 8.9208 4.70713C8.53026 4.56909 8.32557 4.1406 8.46361 3.75007C8.97804 2.29459 10.3661 1.25 12 1.25C13.634 1.25 15.022 2.29459 15.5365 3.75007C15.6745 4.1406 15.4698 4.56909 15.0793 4.70713C14.6887 4.84517 14.2602 4.64047 14.1222 4.24993C13.813 3.37503 12.9785 2.75 12 2.75Z" fill="currentColor"/>
@@ -92,6 +92,38 @@
         </div>
       </div>
     </aside>
+  </div>
+  <div id="modal-usuario" class="modal-fondo oculto">
+    <div class="modal-contenido perfil-usuario">
+      <div class="modal-header">
+        <button class="cerrar-modal">✕</button>
+      </div>
+      <div class="perfil-cabecera">
+        <h2 class="perfil-nombre"></h2>
+        <p class="perfil-username"></p>
+      </div>
+      <div class="perfil-info">
+        <div class="info-item">
+          <strong>Email:</strong>
+          <span class="perfil-email"></span>
+        </div>
+        <div class="info-item">
+          <strong>Teléfono:</strong>
+          <span class="perfil-telefono"></span>
+        </div>
+        <div class="info-item">
+          <strong>Sitio web:</strong>
+          <a class="perfil-website" target="_blank"></a>
+        </div>
+        <div class="info-item">
+          <strong>Ubicación:</strong>
+          <div class="ubicacion-container">
+            <span class="perfil-ubicacion"></span>
+            <a class="perfil-mapa" target="_blank">Ver en Google Maps 🗺️</a>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
   <button id="volverArriba" class="volver-arriba" aria-label="Volver arriba">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24">

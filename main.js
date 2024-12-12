@@ -233,47 +233,99 @@ entradaBusqueda.addEventListener('input', (e) => {
   realizarBusqueda(e.target.value);
 });
 
+// Funcionalidad del modal de usuario
+const modalUsuario = document.getElementById('modal-usuario');
+const btnCerrarModalUsuario = modalUsuario.querySelector('.cerrar-modal');
+
+// Hacer la función mostrarPerfilUsuario disponible globalmente
+window.mostrarPerfilUsuario = function(usuario) {
+  // Rellenar la información del usuario en el modal
+  modalUsuario.querySelector('.perfil-nombre').textContent = usuario.name;
+  modalUsuario.querySelector('.perfil-username').textContent = `@${usuario.username}`;
+  modalUsuario.querySelector('.perfil-email').textContent = usuario.email;
+  modalUsuario.querySelector('.perfil-telefono').textContent = usuario.phone;
+  
+  const websiteLink = modalUsuario.querySelector('.perfil-website');
+  websiteLink.href = `http://${usuario.website}`;
+  websiteLink.textContent = usuario.website;
+  
+  modalUsuario.querySelector('.perfil-ubicacion').textContent = `Lat: ${usuario.lat}, Lng: ${usuario.lng}`;
+  
+  // Configurar el enlace a Google Maps
+  const mapaLink = modalUsuario.querySelector('.perfil-mapa');
+  mapaLink.href = `https://www.google.com/maps/search/?api=1&query=${usuario.lat},${usuario.lng}&zoom=20`;
+  
+  // Mostrar el modal
+  modalUsuario.classList.remove('oculto');
+};
+
+function ocultarModalUsuario() {
+  modalUsuario.classList.add('oculto');
+}
+
+// Eventos para abrir/cerrar el modal de usuario
+btnCerrarModalUsuario.addEventListener('click', ocultarModalUsuario);
+modalUsuario.addEventListener('click', (e) => {
+  if (e.target === modalUsuario) {
+    ocultarModalUsuario();
+  }
+});
+
 // Función para mostrar los resultados
 function mostrarResultados(resultados, tipo) {
   encabezadoResultados.textContent = `${resultados.length} resultados encontrados`;
 
   listaResultados.innerHTML = resultados.map(resultado => {
     switch (tipo) {
-      case 'fotos':
-        return `
-          <div class="search-result-item photo">
-            <img src="${resultado.url}" alt="${resultado.title}">
-            <div class="photo-title">${resultado.title}</div>
-          </div>`;
       case 'usuarios':
         return `
-          <div class="search-result-item">
+          <div class="item-resultado-busqueda usuario" data-userid="${resultado.id}">
             <strong>@${resultado.username}</strong>
             <div>${resultado.name}</div>
           </div>`;
-      case 'publicaciones':
-        const autor = users.find(user => user.id === resultado.userId);
+      case 'fotos':
         return `
-          <div class="search-result-item">
+          <div class="item-resultado-busqueda photo">
+            <img src="${resultado.url}" alt="${resultado.title}">
+            <div class="photo-title">${resultado.title}</div>
+          </div>`;
+      case 'publicaciones':
+        const autor = usuariosObjetos.find(user => user.id === resultado.userId);
+        return `
+          <div class="item-resultado-busqueda">
             <div class="post-title">${resultado.title}</div>
             <div class="post-author">Publicado por @${autor.username}</div>
           </div>`;
       case 'comentarios':
         return `
-          <div class="search-result-item">
+          <div class="item-resultado-busqueda">
             <div class="comment-name">${resultado.name}</div>
             <div class="comment-body">${resultado.body.substring(0, 100)}...</div>
           </div>`;
       case 'todos':
         return `
-          <div class="search-result-item">
+          <div class="item-resultado-busqueda">
             <div class="todo-title">${resultado.title}</div>
             <div class="todo-status">${resultado.completed ? '✓ Completado' : '○ Pendiente'}</div>
           </div>`;
       default:
-        return `<div class="search-result-item">${resultado.title || resultado.name}</div>`;
+        return `<div class="item-resultado-busqueda">${resultado.title || resultado.name}</div>`;
     }
   }).join('');
+
+  // Añadir event listeners para los resultados de usuarios
+  if (tipo === 'usuarios') {
+    const resultadosUsuarios = listaResultados.querySelectorAll('.item-resultado-busqueda.usuario');
+    resultadosUsuarios.forEach(resultado => {
+      resultado.addEventListener('click', () => {
+        const userId = parseInt(resultado.dataset.userid);
+        const usuario = usuariosObjetos.find(u => u.id === userId);
+        if (usuario) {
+          mostrarPerfilUsuario(usuario);
+        }
+      });
+    });
+  }
 }
 
 // Función para realizar la búsqueda
@@ -289,7 +341,7 @@ function realizarBusqueda(consulta) {
 
   switch (tipoBusquedaSeleccionado) {
     case 'usuarios':
-      resultados = users.filter(usuario =>
+      resultados = usuariosObjetos.filter(usuario =>
         usuario.username.toLowerCase().includes(consulta)
       );
       break;
@@ -308,7 +360,7 @@ function realizarBusqueda(consulta) {
         foto.title.toLowerCase().includes(consulta)
       ).map(foto => new Photo(foto));
       break;
-    case 'tareas':
+    case 'todos':
       resultados = todos.filter(tarea =>
         tarea.title.toLowerCase().includes(consulta)
       ).map(tarea => new Todo(tarea));
