@@ -16,6 +16,7 @@ const publicacionesObjetos = [];
 const comentariosObjetos = [];
 let todosObjetos = [];
 
+
 // Crear usuarios predefinidos
 let idMaximo = 0;
 for (let i = 0; i < users.length; i++) {
