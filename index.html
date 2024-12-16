@@ -62,12 +62,12 @@
             <div id="modal-add-comments" class="modal-fondo oculto">
                 <div class="formulario-comentario">
                   <form>
-                    <select id="usuarioSelect" required>
+                    <select id="usuarioSelect" >
                       <option value="">Selecciona un usuario</option>
                     </select>
-                    <input type="text" placeholder="Introduce el título del comentario" required>
+                    <input id="tituloComment" type="text" placeholder="Introduce el título del comentario" required>
                     <textarea id="postBody" placeholder="Contenido de el comentario" required></textarea>
-                    <button type="submit">Publicar</button>
+                    <button id="publicarComment" type="submit">Publicar</button>
                     <button type="button" id="cancelar-comment">Cancelar</button>
                   </form>
                 </div>

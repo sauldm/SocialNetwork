@@ -36,9 +36,8 @@ export class Post {
     postID.textContent = this.id;
     postID.classList.add('oculto');
 
-    //Añadir comentario
+    //Coger los botones para el comentario
     let btnAddComentario = postElement.querySelector("#add-comment");
-    let contenedorFormComentario = postElement.querySelector(".formulario-comentario");
     let btnCancelarComment = postElement.querySelector("#cancelar-comment");
 
     //Mostrar el formulario de añadir el comentario
@@ -46,7 +45,7 @@ export class Post {
       postElement.querySelector("#modal-add-comments").classList.remove("oculto");
     });
 
-    //Ocuktar el formulario de añadir el comentario al pulsar cancelar
+    //Ocultar el formulario de añadir el comentario al pulsar cancelar
     btnCancelarComment.addEventListener("click",()=>{
       postElement.querySelector("#modal-add-comments").classList.add("oculto");
     });

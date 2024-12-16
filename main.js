@@ -131,6 +131,17 @@ document.getElementById('nuevoPostForm').addEventListener('submit', function (e)
     newPost.asignarUsuario(usuario);
   }
 
+  //Crear un nuevo comentario comentario
+  /* let btnPublicar = document.querySelector("#publicarComment");
+  btnPublicar.addEventListener("click",(e)=>{
+    let tituloComment = document.querySelector("#tituloComment").value;
+    let contenidoComment = document.querySelector("#postId").value;
+    let newCom = new Comment(nextId,userId,tituloComment,contenidoComment);
+    console.log(newCom)
+    newCom.push(comentariosObjetos);
+  }); */
+
+
   // Añadir al principio del array
   publicacionesObjetos.splice(0, 0, newPost);
 
