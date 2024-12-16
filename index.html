@@ -60,20 +60,17 @@
               <img src="img/add_comment.svg" alt="Añadir comentario" class="add-comment-icon" title="Añadir comentario">
             </button>
             <div id="modal-add-comments" class="modal-fondo oculto">
-              <div class="modal-contenido">
-                <div class="formulario-comentario oculto">
+                <div class="formulario-comentario">
                   <form>
                     <select id="usuarioSelect" required>
                       <option value="">Selecciona un usuario</option>
                     </select>
-                    <label for="">Titulo del comentario</label>
-                    <input type="text">
-                    <textarea id="postBody" placeholder="Contenido de la publicación" required></textarea>
+                    <input type="text" placeholder="Introduce el título del comentario" required>
+                    <textarea id="postBody" placeholder="Contenido de el comentario" required></textarea>
                     <button type="submit">Publicar</button>
                     <button type="button" id="cancelar-comment">Cancelar</button>
                   </form>
                 </div>
-              </div>
             </div>
             
             <div class="comments-section">

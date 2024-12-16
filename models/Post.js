@@ -41,12 +41,12 @@ export class Post {
     let contenedorFormComentario = postElement.querySelector(".formulario-comentario");
     let btnCancelarComment = postElement.querySelector("#cancelar-comment");
 
+    //Mostrar el formulario de añadir el comentario
     btnAddComentario.addEventListener("click",()=>{
-      console.log(contenedorFormComentario);
-      contenedorFormComentario.classList.remove("oculto");
       postElement.querySelector("#modal-add-comments").classList.remove("oculto");
     });
 
+    //Ocuktar el formulario de añadir el comentario al pulsar cancelar
     btnCancelarComment.addEventListener("click",()=>{
       postElement.querySelector("#modal-add-comments").classList.add("oculto");
     });
@@ -63,7 +63,7 @@ export class Post {
       commentElement.classList.add('hidden');
       commentsContainer.appendChild(commentElement);
     });
-
+    //Miguel gil
     // Si hay más de 3 comentarios, mostrar el enlace "Ver más comentarios"
     if (this.comments.length > 3) {
       const verMasLink = document.createElement('a');
