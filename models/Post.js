@@ -69,7 +69,7 @@ export class Post {
       if (this.user) {
         const mostrarPerfilUsuario = window.mostrarPerfilUsuario;
         if (typeof mostrarPerfilUsuario === 'function') {
-          mostrarPerfilUsuario(this.user);
+          mostrarPerfilUsuario(this.user.id);
         }
       }
     });

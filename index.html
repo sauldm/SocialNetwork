@@ -87,6 +87,42 @@
           </div>
         </template>
 
+        <!-- Templates para resultados de búsqueda -->
+        <template id="usuario-resultado-template">
+          <div class="item-resultado-busqueda usuario" data-userid="">
+            <strong class="username"></strong>
+            <div class="name"></div>
+          </div>
+        </template>
+        
+        <template id="foto-resultado-template">
+          <div class="item-resultado-busqueda photo">
+            <img class="photo-img" src="" alt="">
+            <div class="photo-title"></div>
+          </div>
+        </template>
+        
+        <template id="publicacion-resultado-template">
+          <div class="item-resultado-busqueda">
+            <div class="post-title"></div>
+            <div class="post-author"></div>
+          </div>
+        </template>
+        
+        <template id="comentario-resultado-template">
+          <div class="item-resultado-busqueda">
+            <div class="comment-name"></div>
+            <div class="comment-body"></div>
+          </div>
+        </template>
+        
+        <template id="todo-resultado-template">
+          <div class="item-resultado-busqueda">
+            <div class="todo-title"></div>
+            <div class="todo-status"></div>
+          </div>
+        </template>
+
         <div id="modal-eliminar" class="modal-fondo oculto">
           <div class="modal-contenido">
             <h3>¿Estás seguro de que quieres eliminar esta publicación?</h3>
@@ -145,6 +181,10 @@
             <span class="perfil-ubicacion"></span>
             <a class="perfil-mapa" target="_blank">Ver en Google Maps 🗺️</a>
           </div>
+        </div>
+        <div class="user-todos-section">
+          <h3>Tareas del usuario</h3>
+          <div class="user-todos-list"></div>
         </div>
       </div>
     </div>

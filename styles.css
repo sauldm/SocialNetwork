@@ -532,10 +532,62 @@ body {
   margin-bottom: 5px;
 }
 
+/* Estilos para la sección de todos */
+.user-todos-section {
+  margin-top: 20px;
+  border-top: 1px solid #ddd;
+  padding-top: 20px;
+}
+
+.user-todos-list {
+  max-height: 300px; /* Altura máxima para la lista de todos */
+  overflow-y: auto; /* Permitir scroll vertical */
+  padding-right: 10px; /* Espacio para la barra de scroll */
+}
+
+.user-todos-section h3 {
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.todo-item {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  padding: 8px;
+  background-color: #f8f9fa;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.todo-item:hover {
+  background-color: #e9ecef;
+}
+
+.todo-item input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+.todo-item label {
+  flex: 1;
+  cursor: pointer;
+  color: #495057;
+}
+
+.todo-item input[type="checkbox"]:checked + label {
+  text-decoration: line-through;
+  color: #6c757d;
+}
+
 /* Estilos para el modal de perfil de usuario */
 .perfil-usuario {
   max-width: 500px;
-  padding: 1rem;
+  max-height: 90vh; /* Altura máxima del 80% de la ventana */
+  overflow-y: auto; /* Permitir scroll vertical */
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  position: relative;
 }
 
 .modal-header {
