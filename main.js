@@ -14,6 +14,7 @@ import { Photo } from './models/Photo.js';
 const usuariosObjetos = [];
 const publicacionesObjetos = [];
 const comentariosObjetos = [];
+let todosObjetos = [];
 
 // Crear usuarios predefinidos
 let idMaximo = 0;
@@ -24,10 +25,10 @@ for (let i = 0; i < users.length; i++) {
 }
 
 const usuariosPredefinidos = [
-  { id: idMaximo + 1, name: "Andrés", username: "andres.aranda", email: "andres@example.com", lat: "39.4699", lng: "-0.3763", phone: "123-456-789", website: "andres.dev" },
-  { id: idMaximo + 2, name: "Saúl", username: "saul.dominguez", email: "saul@example.com", lat: "39.4699", lng: "-0.3763", phone: "234-567-890", website: "saul.dev" },
-  { id: idMaximo + 3, name: "Miguel", username: "miguel.rico", email: "miguel@example.com", lat: "39.4699", lng: "-0.3763", phone: "345-678-901", website: "miguel.dev" },
-  { id: idMaximo + 4, name: "Carlos", username: "carlos.perea", email: "carlos@example.com", lat: "39.4699", lng: "-0.3763", phone: "456-789-012", website: "carlos.dev" }
+  { id: idMaximo + 1, name: "Andrés", username: "andres.aranda", email: "andres@example.com", lat: "38.471466", lng: "-0.795974", phone: "123-456-789", website: "andres.dev" },
+  { id: idMaximo + 2, name: "Saúl", username: "saul.dominguez", email: "saul@example.com", lat: "38.435533", lng: "-0.839848", phone: "234-567-890", website: "saul.dev" },
+  { id: idMaximo + 3, name: "Miguel", username: "miguel.rico", email: "miguel@example.com", lat: "38.435533", lng: "-0.839848", phone: "345-678-901", website: "miguel.dev" },
+  { id: idMaximo + 4, name: "Carlos", username: "carlos.perea", email: "carlos@example.com", lat: "38.382552", lng: "-0.763297", phone: "456-789-012", website: "carlos.dev" }
 ];
 
 // Crear objetos User para los usuarios predefinidos
@@ -94,6 +95,9 @@ comments.forEach(datosComentario => {
     publicacion.agregarComentario(comentario);
   }
 });
+
+// Crear objetos Todo
+todosObjetos = todos.map(todo => new Todo(todo));
 
 // Establecer el select SOLO con los usuarios predefinidos
 const selectorUsuario = document.getElementById('usuarioSelect');
@@ -204,6 +208,7 @@ btnCancelar.addEventListener('click', ocultarModalEliminar);
 btnEliminar.addEventListener('click', () => {
   alert("Esto aun no está implementado jaja poneros las pilas");
   ocultarModalEliminar();
+  
 });
 
 // Configuración de búsqueda
@@ -237,8 +242,11 @@ const modalUsuario = document.getElementById('modal-usuario');
 const btnCerrarModalUsuario = modalUsuario.querySelector('.cerrar-modal');
 
 // Hacer la función mostrarPerfilUsuario disponible globalmente
-window.mostrarPerfilUsuario = function(usuario) {
-  // Rellenar la información del usuario en el modal
+window.mostrarPerfilUsuario = function (userId) {
+  const usuario = usuariosObjetos.find(user => user.id === userId);
+  if (!usuario) return;
+
+  // Código existente del perfil...
   modalUsuario.querySelector('.perfil-nombre').textContent = usuario.name;
   modalUsuario.querySelector('.perfil-username').textContent = `@${usuario.username}`;
   modalUsuario.querySelector('.perfil-email').textContent = usuario.email;
@@ -253,6 +261,28 @@ window.mostrarPerfilUsuario = function(usuario) {
   // Configurar el enlace a Google Maps
   const mapaLink = modalUsuario.querySelector('.perfil-mapa');
   mapaLink.href = `https://www.google.com/maps/search/?api=1&query=${usuario.lat},${usuario.lng}&zoom=20`;
+
+  // Mostrar los todos del usuario
+  const todosUsuario = todosObjetos.filter(todo => todo.userId === userId);
+  const todosContainer = document.querySelector('.user-todos-list');
+  todosContainer.innerHTML = '';
+
+  todosUsuario.forEach(todo => {
+    const todoElement = document.createElement('div');
+    todoElement.className = 'todo-item';
+    todoElement.innerHTML = `
+      <input type="checkbox" id="todo-${todo.id}" ${todo.completed ? 'checked' : ''}>
+      <label for="todo-${todo.id}">${todo.title}</label>
+    `;
+
+    const checkbox = todoElement.querySelector('input[type="checkbox"]');
+    checkbox.addEventListener('change', (e) => {
+      todo.completed = e.target.checked;
+      // Aquí podrías añadir código para persistir el cambio si lo necesitas
+    });
+
+    todosContainer.appendChild(todoElement);
+  });
 
   // Mostrar el modal
   modalUsuario.classList.remove('oculto');
@@ -274,43 +304,52 @@ modalUsuario.addEventListener('click', (e) => {
 function mostrarResultados(resultados, tipo) {
   encabezadoResultados.textContent = `${resultados.length} resultados encontrados`;
 
-  listaResultados.innerHTML = resultados.map(resultado => {
+  listaResultados.innerHTML = '';
+  resultados.forEach(resultado => {
+    let template;
     switch (tipo) {
       case 'usuarios':
-        return `
-          <div class="item-resultado-busqueda usuario" data-userid="${resultado.id}">
-            <strong>@${resultado.username}</strong>
-            <div>${resultado.name}</div>
-          </div>`;
+        template = document.querySelector('#usuario-resultado-template').content.cloneNode(true);
+        template.querySelector('.username').textContent = `@${resultado.username}`;
+        template.querySelector('.name').textContent = resultado.name;
+        template.querySelector('.usuario').dataset.userid = resultado.id;
+        break;
+
       case 'fotos':
-        return `
-          <div class="item-resultado-busqueda photo">
-            <img src="${resultado.url}" alt="${resultado.title}">
-            <div class="photo-title">${resultado.title}</div>
-          </div>`;
+        template = document.querySelector('#foto-resultado-template').content.cloneNode(true);
+        const img = template.querySelector('.photo-img');
+        img.src = resultado.url;
+        img.alt = resultado.title;
+        template.querySelector('.photo-title').textContent = resultado.title;
+        break;
+
       case 'publicaciones':
+        template = document.querySelector('#publicacion-resultado-template').content.cloneNode(true);
         const autor = usuariosObjetos.find(user => user.id === resultado.userId);
-        return `
-          <div class="item-resultado-busqueda">
-            <div class="post-title">${resultado.title}</div>
-            <div class="post-author">Publicado por @${autor.username}</div>
-          </div>`;
+        template.querySelector('.post-title').textContent = resultado.title;
+        template.querySelector('.post-author').textContent = `Publicado por @${autor.username}`;
+        break;
+
       case 'comentarios':
-        return `
-          <div class="item-resultado-busqueda">
-            <div class="comment-name">${resultado.name}</div>
-            <div class="comment-body">${resultado.body.substring(0, 100)}...</div>
-          </div>`;
+        template = document.querySelector('#comentario-resultado-template').content.cloneNode(true);
+        template.querySelector('.comment-name').textContent = resultado.name;
+        template.querySelector('.comment-body').textContent = `${resultado.body.substring(0, 100)}...`;
+        break;
+
       case 'todos':
-        return `
-          <div class="item-resultado-busqueda">
-            <div class="todo-title">${resultado.title}</div>
-            <div class="todo-status">${resultado.completed ? '✓ Completado' : '○ Pendiente'}</div>
-          </div>`;
+        template = document.querySelector('#todo-resultado-template').content.cloneNode(true);
+        template.querySelector('.todo-title').textContent = resultado.title;
+        template.querySelector('.todo-status').textContent = resultado.completed ? '✓ Completado' : '○ Pendiente';
+        break;
+
       default:
-        return `<div class="item-resultado-busqueda">${resultado.title || resultado.name}</div>`;
+        template = document.createElement('div');
+        template.className = 'item-resultado-busqueda';
+        template.textContent = resultado.title || resultado.name;
     }
-  }).join('');
+
+    listaResultados.appendChild(template);
+  });
 
   // Añadir event listeners para los resultados de usuarios
   if (tipo === 'usuarios') {
@@ -320,7 +359,7 @@ function mostrarResultados(resultados, tipo) {
         const userId = parseInt(resultado.dataset.userid);
         const usuario = usuariosObjetos.find(u => u.id === userId);
         if (usuario) {
-          mostrarPerfilUsuario(usuario);
+          mostrarPerfilUsuario(usuario.id);
         }
       });
     });
