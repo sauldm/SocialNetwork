@@ -202,7 +202,6 @@ document.addEventListener('click', (e) => {
 btnCancelar.addEventListener('click', ocultarModalEliminar);
 
 btnEliminar.addEventListener('click', () => {
-  // AQUÍ VA LA LÓGICA DE ELIMINAR PUBLICACIÓN
   alert("Esto aun no está implementado jaja poneros las pilas");
   ocultarModalEliminar();
 });
@@ -244,17 +243,17 @@ window.mostrarPerfilUsuario = function(usuario) {
   modalUsuario.querySelector('.perfil-username').textContent = `@${usuario.username}`;
   modalUsuario.querySelector('.perfil-email').textContent = usuario.email;
   modalUsuario.querySelector('.perfil-telefono').textContent = usuario.phone;
-  
+
   const websiteLink = modalUsuario.querySelector('.perfil-website');
   websiteLink.href = `http://${usuario.website}`;
   websiteLink.textContent = usuario.website;
-  
+
   modalUsuario.querySelector('.perfil-ubicacion').textContent = `Lat: ${usuario.lat}, Lng: ${usuario.lng}`;
-  
+
   // Configurar el enlace a Google Maps
   const mapaLink = modalUsuario.querySelector('.perfil-mapa');
   mapaLink.href = `https://www.google.com/maps/search/?api=1&query=${usuario.lat},${usuario.lng}&zoom=20`;
-  
+
   // Mostrar el modal
   modalUsuario.classList.remove('oculto');
 };

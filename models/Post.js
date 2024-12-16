@@ -32,6 +32,9 @@ export class Post {
     const commentsContainer = postElement.querySelector('.comments-container');
     const commentsCount = postElement.querySelector('.comments-count');
     commentsCount.textContent = this.comments.length;
+    const postID = postElement.querySelector('#post-id'); 
+    postID.textContent = this.id;
+    postID.classList.add('oculto');
     
     // Mostrar los primeros 3 comentarios
     this.comments.slice(0, 3).forEach(comment => {
