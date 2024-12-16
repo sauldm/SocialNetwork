@@ -35,6 +35,21 @@ export class Post {
     const postID = postElement.querySelector('#post-id'); 
     postID.textContent = this.id;
     postID.classList.add('oculto');
+
+    //Añadir comentario
+    let btnAddComentario = postElement.querySelector("#add-comment");
+    let contenedorFormComentario = postElement.querySelector(".formulario-comentario");
+    let btnCancelarComment = postElement.querySelector("#cancelar-comment");
+
+    btnAddComentario.addEventListener("click",()=>{
+      console.log(contenedorFormComentario);
+      contenedorFormComentario.classList.remove("oculto");
+      postElement.querySelector("#modal-add-comments").classList.remove("oculto");
+    });
+
+    btnCancelarComment.addEventListener("click",()=>{
+      postElement.querySelector("#modal-add-comments").classList.add("oculto");
+    });
     
     // Mostrar los primeros 3 comentarios
     this.comments.slice(0, 3).forEach(comment => {
