@@ -56,19 +56,26 @@
               </button>
             </div>
             <p class="post-body"></p>
-            <button class="add-comment">
+            <button id="add-comment">
               <img src="img/add_comment.svg" alt="Añadir comentario" class="add-comment-icon" title="Añadir comentario">
             </button>
-            <div class="formulario-comentario oculto">
-              <form>
-                <select id="usuarioSelect" required>
-                  <option value="">Selecciona un usuario</option>
-                </select>
-                <input type="text">
-                <textarea id="postBody" placeholder="Contenido de la publicación" required></textarea>
-                <button type="submit">Publicar</button>
-              </form>
+            <div id="modal-add-comments" class="modal-fondo oculto">
+              <div class="modal-contenido">
+                <div class="formulario-comentario oculto">
+                  <form>
+                    <select id="usuarioSelect" required>
+                      <option value="">Selecciona un usuario</option>
+                    </select>
+                    <label for="">Titulo del comentario</label>
+                    <input type="text">
+                    <textarea id="postBody" placeholder="Contenido de la publicación" required></textarea>
+                    <button type="submit">Publicar</button>
+                    <button type="button" id="cancelar-comment">Cancelar</button>
+                  </form>
+                </div>
+              </div>
             </div>
+            
             <div class="comments-section">
               <h3>Comentarios: <span class="comments-count"></span></h3>
               <div class="comments-container"></div>
