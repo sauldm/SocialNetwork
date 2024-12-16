@@ -111,7 +111,7 @@ usuariosPredefinidos.forEach(usuario => {
 
 // Manejar la creación de nuevas publicaciones
 document.getElementById('nuevoPostForm').addEventListener('submit', function (e) {
-  e.preventDefault();
+  e.preventDefault();   
 
   const userId = parseInt(document.getElementById('usuarioSelect').value);
   const title = document.getElementById('postTitulo').value;
