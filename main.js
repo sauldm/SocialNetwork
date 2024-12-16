@@ -59,6 +59,7 @@ users.forEach(datosUsuario => {
     datosUsuario.website
   );
   usuariosObjetos.push(usuario);
+  usuariosPredefinidos.push(usuario);
 });
 
 // Crear objetos Post
